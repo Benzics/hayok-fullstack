@@ -30,4 +30,7 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+  .custom-bg-lightblue {
+    background-color: #00c6c0;
+  }
 }
