@@ -9,13 +9,13 @@ export interface RegisterProps {
 }
 
 export interface LoginProps {
-    setErrors: React.Dispatch<React.SetStateAction<string[]>>;
+    setErrors: React.Dispatch<React.SetStateAction<Errors>>;
     setStatus: React.Dispatch<React.SetStateAction<string>>;
     [key: string]: any;
 }
 
 export interface ForgotPasswordProps {
-    setErrors: React.Dispatch<React.SetStateAction<string[]>>;
+    setErrors: React.Dispatch<React.SetStateAction<Errors>>;
     setStatus: React.Dispatch<React.SetStateAction<string | null>>;
     email: string;
 }

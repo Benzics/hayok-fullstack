@@ -33,4 +33,28 @@ body {
   .custom-bg-lightblue {
     background-color: #00c6c0;
   }
+  .custom-bg-navy {
+    background-color: rgba(35,42,66,0.8);
+  }
+  .custom-bg-blue {
+    background-color: #232a42;
+  }
+  .custom-text-blue {
+    color: #232a42;
+  }
+  .custom-border-blue {
+    border-color: #232a42;
+  }
+  .custom-bg-gray {
+    background-color: #404760;
+  }
+  .active-nav {
+    color: #0a9598;
+    border-color: #0a9598;
+    font-weight: bold;
+  }
+  .icon-wrap{
+    display: inline-block;
+    background-color: #404760;
+  }
 }

@@ -2,19 +2,24 @@
 
 import useSWR from 'swr'
 import axios from '@/lib/axios'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { AuthProps, RegisterProps, LoginProps, ForgotPasswordProps, ResetPasswordProps } from '@/types'
 
 export const useAuth = ({ middleware, redirectIfAuthenticated }: AuthProps = {}) => {
     const router = useRouter()
     const params = useParams()
+    const [loading, setLoading] = useState(true)
 
     const { data: user, error, mutate } = useSWR('/api/user', () =>
         axios
             .get('/api/user')
-            .then(res => res.data)
+            .then( (res) => {
+                setLoading(false)
+                return res.data
+            })
             .catch(error => {
+                setLoading(false)
                 if (error.response.status !== 409) throw error
 
                 router.push('/verify-email')
@@ -99,7 +104,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated }: AuthProps = {})
             await axios.post('/logout').then(() => mutate())
         }
 
-        window.location.pathname = '/login'
+        window.location.pathname = '/'
     }
 
     useEffect(() => {
@@ -111,6 +116,8 @@ export const useAuth = ({ middleware, redirectIfAuthenticated }: AuthProps = {})
         )
             router.push(redirectIfAuthenticated)
         if (middleware === 'auth' && error) logout()
+        
+        setLoading(false);
     }, [user, error])
 
     return {
@@ -121,5 +128,6 @@ export const useAuth = ({ middleware, redirectIfAuthenticated }: AuthProps = {})
         resetPassword,
         resendEmailVerification,
         logout,
+        loading,
     }
 }
